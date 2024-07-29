@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='result.css') }}">
+    <title>Tiếng Anh</title>
+</head>
+<body>
+    <h1>Danh sách từ vựng</h1>
+    <div class="main">
+        <table>
+            <tr>
+                {% for i in range(5) %}
+                <th>Từ {{ i*20 + 1 }} - {{ i*20 + 20 }}</th>
+                {% endfor %}
+            </tr>
+            {% for i in range(20) %}
+            <tr>
+                {% for j in range(5) %}
+                <td>
+                    {% if (i + j*20) < words|length %}
+                    <p><strong>{{ words[i + j*20][0] }}</strong></p>
+                    <p>{{ words[i + j*20][1] }}</p>
+                    <p>{{ words[i + j*20][2] }}</p>
+                    {% endif %}
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

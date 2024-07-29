@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Tiếng Anh</title>
+</head>
+<body>
+    <h1>Check info word by Dictionary-cambridge</h1>
+    <div class="main">
+        <h2>Enter word</h2>
+        <form method="post" action="{{ url_for('get_word_info') }}">
+            <label for="word">Enter word:</label>
+            <input type="text" id="word" name="word" required>
+            <button type="submit">Find</button>
+        </form>
+        {% if word_means %}
+        <div class="result">
+            <h3>Nghĩa của từ:</h3>
+            <p>{{ word_means }}</p>
+            <h3>Phiên âm:</h3>
+            <p>{{ word_ipa }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
