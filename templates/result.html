@@ -5,31 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='result.css') }}">
-    <title>Tiếng Anh</title>
+    <title>Danh Sách Từ Vựng</title>
+    <style>
+        /* CSS cơ bản để căn chỉnh bảng */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        td, th {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .main {
+            margin: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Danh sách từ vựng</h1>
     <div class="main">
+        <h1>Danh Sách Từ Vựng</h1>
         <table>
-            <tr>
-                {% for i in range(5) %}
-                <th>Từ {{ i*20 + 1 }} - {{ i*20 + 20 }}</th>
+            <thead>
+                <tr>
+                    <th>Word</th>
+                    <th>Meaning</th>
+                    <th>IPA</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for word, meaning, ipa in words %}
+                <tr>
+                    <td>{{ word }}</td>
+                    <td>{{ meaning }}</td>
+                    <td>{{ ipa }}</td>
+                </tr>
                 {% endfor %}
-            </tr>
-            {% for i in range(20) %}
-            <tr>
-                {% for j in range(5) %}
-                <td>
-                    {% if (i + j*20) < words|length %}
-                    <p><strong>{{ words[i + j*20][0] }}</strong></p>
-                    <p>{{ words[i + j*20][1] }}</p>
-                    <p>{{ words[i + j*20][2] }}</p>
-                    {% endif %}
-                </td>
-                {% endfor %}
-            </tr>
-            {% endfor %}
+            </tbody>
         </table>
+        <a href="{{ url_for('get_word_info') }}">Back to Search</a>
+        <a href="{{ url_for('view_table') }}">View Table Only</a>
     </div>
 </body>
 </html>
